@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:2
 
 WORKDIR /usr/src/app
 
@@ -20,21 +20,22 @@ RUN apt-get install -y \
     net-tools \
     git-all \
     supervisor \
+	redis-server\
     vim
 
-COPY scripts/mbl-gunicorn.sh bin/
-COPY scripts/mbl-supervisord.conf /etc/supervisor/conf.d/
+COPY scripts/amphora-gunicorn.sh bin/
+COPY scripts/amphora-supervisord.conf /etc/supervisor/conf.d/
 
-RUN chmod u+x bin/mbl-gunicorn.sh
-# TODO: This should be changed to master once we are done testing
-RUN git clone -b task/MHDP-25  https://github.com/diging/mbl-browser.git
-WORKDIR /usr/src/app/mbl-browser
+RUN chmod u+x bin/amphora-gunicorn.sh
+
+RUN git clone -b task/JARS-DOCKER https://github.com/diging/amphora.git
+WORKDIR /usr/src/app/amphora
 RUN pip install -r requirements.txt
 
 COPY env_secrets .
 RUN /bin/bash -c "source env_secrets; python manage.py migrate; python manage.py collectstatic --noinput"
 
 EXPOSE 8000
-CMD /bin/bash -c "service supervisor start; tail -f /dev/null"
+CMD /bin/bash -c "service redis-server start; service supervisor start; tail -f /dev/null"
 
 
