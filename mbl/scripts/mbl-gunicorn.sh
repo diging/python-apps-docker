@@ -4,7 +4,7 @@ NAME="mbl-browser"                                  # Name of the application
 DJANGODIR=/usr/src/app/mbl-browser            # Django project directory
 SOCKFILE=/usr/src/app/run/mbl.sock  # we will communicte using this unix socket
 NUM_WORKERS=3                                     # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=mbl.production_settings             # which settings file should Django use
+DJANGO_SETTINGS_MODULE=mbl.settings             # which settings file should Django use
 DJANGO_WSGI_MODULE=mbl.wsgi                     # WSGI module name
 
 echo "Starting $NAME as `whoami`"
