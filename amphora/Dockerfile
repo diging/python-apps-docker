@@ -30,6 +30,7 @@ RUN chmod u+x bin/amphora-gunicorn.sh
 
 RUN git clone -b task/JARS-DOCKER https://github.com/diging/amphora.git
 WORKDIR /usr/src/app/amphora
+RUN pip install --upgrade setuptools
 RUN pip install -r requirements.txt
 
 COPY env_secrets .
