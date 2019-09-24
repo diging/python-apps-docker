@@ -24,6 +24,7 @@ RUN apt-get install -y \
     vim
 
 COPY scripts/vogon-gunicorn.sh bin/
+COPY scripts/vogon-celery.sh bin/
 COPY scripts/vogon-supervisord.conf /etc/supervisor/conf.d/
 
 RUN chmod u+x bin/vogon-gunicorn.sh
