@@ -25,9 +25,12 @@ RUN apt-get install -y \
 
 COPY scripts/vogon-gunicorn.sh bin/
 COPY scripts/vogon-celery.sh bin/
+COPY scripts/vogon-celery-beat.sh bin/
 COPY scripts/vogon-supervisord.conf /etc/supervisor/conf.d/
 
 RUN chmod u+x bin/vogon-gunicorn.sh
+RUN chmod u+x bin/vogon-celery.sh
+RUN chmod u+x bin/vogon-celery-beat.sh
 # TODO: This should be changed to master once we are done testing
 RUN git clone -b story/VGNWB-259-4  https://github.com/diging/vogon-web.git
 WORKDIR /usr/src/app/vogon-web
