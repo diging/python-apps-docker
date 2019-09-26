@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.6
 
 WORKDIR /usr/src/app
 
@@ -29,7 +29,7 @@ COPY scripts/vogon-supervisord.conf /etc/supervisor/conf.d/
 
 RUN chmod u+x bin/vogon-gunicorn.sh
 # TODO: This should be changed to master once we are done testing
-RUN git clone -b story/VGNWB-259-4  https://github.com/diging/vogon-web.git
+RUN git clone -b story/VGNWB-259-5  https://github.com/diging/vogon-web.git
 WORKDIR /usr/src/app/vogon-web
 RUN pip install -r requirements.txt
 
