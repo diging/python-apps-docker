@@ -8,6 +8,7 @@ RUN mkdir bin
 
 RUN apt-get update && apt-get upgrade -y && apt-get autoremove && apt-get autoclean
 # most of these are for lxml which needs a bunch of dependancies installed
+RUN apt-get update
 RUN apt-get install -y \
     libffi-dev \
     libssl-dev \
@@ -27,7 +28,7 @@ COPY scripts/mbl-supervisord.conf /etc/supervisor/conf.d/
 
 RUN chmod u+x bin/mbl-gunicorn.sh
 # TODO: This should be changed to master once we are done testing
-RUN git clone -b task/MHDP-25  https://github.com/diging/mbl-browser.git
+RUN git clone -b master  https://github.com/diging/mbl-browser.git
 WORKDIR /usr/src/app/mbl-browser
 RUN pip install -r requirements.txt
 
