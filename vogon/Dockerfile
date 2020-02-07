@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:2
 
 WORKDIR /usr/src/app
 
@@ -29,14 +29,9 @@ COPY scripts/vogon-supervisord.conf /etc/supervisor/conf.d/
 
 RUN chmod u+x bin/vogon-gunicorn.sh
 # TODO: This should be changed to master once we are done testing
-RUN git clone -b story/VGNWB-259-5  https://github.com/diging/vogon-web.git
+RUN git clone https://github.com/diging/vogon-web.git
 WORKDIR /usr/src/app/vogon-web
 RUN pip install -r requirements.txt
 
 COPY env_secrets .
-RUN /bin/bash -c "source env_secrets; python manage.py migrate; python manage.py collectstatic --noinput"
-
-EXPOSE 8000
 CMD /bin/bash -c "service redis-server start; service supervisor start; tail -f /dev/null"
-
-

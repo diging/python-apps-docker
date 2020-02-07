@@ -23,7 +23,4 @@ WORKDIR black-goat
 RUN pip install -r requirements.txt
 
 COPY env_secrets .
-RUN /bin/bash -c "source env_secrets; python manage.py migrate; python manage.py collectstatic --noinput"
-
-EXPOSE 8000
 CMD /bin/bash -c "service redis-server start; service supervisor start; tail -f /dev/null"

@@ -28,7 +28,7 @@ COPY scripts/mbl-supervisord.conf /etc/supervisor/conf.d/
 
 RUN chmod u+x bin/mbl-gunicorn.sh
 # TODO: This should be changed to master once we are done testing
-RUN git clone -b master  https://github.com/diging/mbl-browser.git
+RUN git clone -b develop  https://github.com/diging/mbl-browser.git
 WORKDIR /usr/src/app/mbl-browser
 RUN pip install -r requirements.txt
 
